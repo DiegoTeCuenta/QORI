@@ -19,7 +19,7 @@
     background: var(--ivory);
     color: var(--espresso);
     font-family: 'Georgia', 'Cormorant Garamond', serif;
-    overflow-x: hidden;
+    /* NO usar overflow-x aqui: rompe position:sticky */
   }
 
   .note {
@@ -80,7 +80,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
 
   .hero-label {
@@ -89,14 +88,13 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     opacity: 0.5;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
 
   canvas#rotator {
-    max-width: 42vw;
-    max-height: 58vh;
+    height: 52vh;
     width: auto;
-    height: 58vh;
+    max-width: 40vw;
   }
 
   @media (max-width: 700px) {
@@ -107,7 +105,7 @@
   }
 
   .hero-word {
-    margin-top: 28px;
+    margin-top: 18px;
     font-size: clamp(36px, 7vw, 64px);
     letter-spacing: 4px;
     color: var(--espresso);
