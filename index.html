@@ -22,21 +22,6 @@
     /* NO usar overflow-x aqui: rompe position:sticky */
   }
 
-  .note {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    background: var(--espresso);
-    color: var(--ivory);
-    font-family: -apple-system, sans-serif;
-    font-size: 12px;
-    padding: 10px 14px;
-    border-radius: 6px;
-    z-index: 100;
-    max-width: 240px;
-    line-height: 1.5;
-    opacity: 0.92;
-  }
 
   section {
     min-height: 100vh;
@@ -92,20 +77,21 @@
   }
 
   canvas#rotator {
-    height: 52vh;
+    height: 58vh;
     width: auto;
-    max-width: 40vw;
+    max-width: 44vw;
   }
 
   @media (max-width: 700px) {
     canvas#rotator {
-      max-width: 72vw;
-      height: 48vh;
+      height: 62vh;
+      max-width: 86vw;
     }
+    .hero-word { font-size: 44px; }
   }
 
   .hero-word {
-    margin-top: 18px;
+    margin-top: 26px;
     font-size: clamp(36px, 7vw, 64px);
     letter-spacing: 4px;
     color: var(--espresso);
@@ -153,9 +139,7 @@
 </head>
 <body>
 
-<div class="note">
-  Prototipo con frames reales. Coloca este archivo junto a una carpeta llamada <b>frames/</b> con bottle_00000.webp … bottle_00119.webp
-</div>
+
 
 <section class="filler">
   <p>Scroll para empezar</p>
