@@ -336,6 +336,152 @@
     .aplic-intro h2 { font-size: 27px; }
   }
 
+
+  /* ================= CIERRE + COMPRA ================= */
+  #cierre {
+    min-height: 100vh;
+    padding: 14vh 6vw 8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8vh;
+  }
+
+  .buy {
+    display: flex;
+    align-items: center;
+    gap: 6vw;
+    max-width: 980px;
+    width: 100%;
+  }
+
+  .buy-media { flex: 0 0 38%; display: flex; justify-content: center; }
+  .buy-media img { height: 54vh; width: auto; display: block; }
+
+  .buy-info { flex: 1; min-width: 0; }
+
+  .buy-info .eyebrow {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 12px;
+  }
+
+  .buy-info h2 {
+    font-size: clamp(28px, 3.2vw, 42px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0;
+  }
+
+  .buy-info .rule { margin: 20px 0; }
+
+  .buy-info .desc {
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--smoked);
+    opacity: 0.75;
+    margin-bottom: 26px;
+  }
+
+  .size-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 10px;
+  }
+
+  .sizes { display: flex; gap: 10px; margin-bottom: 24px; }
+
+  .size {
+    flex: 1;
+    border: 1px solid rgba(36,28,22,0.18);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: -apple-system, sans-serif;
+    cursor: pointer;
+    background: none;
+    text-align: left;
+    transition: border-color 0.25s ease;
+  }
+
+  .size:hover { border-color: rgba(36,28,22,0.45); }
+  .size.is-active { border-color: var(--espresso); }
+
+  .size .vol { font-size: 13px; color: var(--espresso); margin-bottom: 3px; }
+  .size .amt { font-size: 12px; opacity: 0.6; }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .price-row .price { font-size: 27px; }
+  .price-row .unit {
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    opacity: 0.55;
+  }
+
+  .add-cart {
+    width: 100%;
+    background: var(--espresso);
+    color: var(--ivory);
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+  }
+
+  .add-cart:hover { opacity: 0.85; }
+
+  .ship-note {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    opacity: 0.45;
+    margin-top: 14px;
+  }
+
+  .colophon {
+    border-top: 1px solid rgba(36,28,22,0.12);
+    padding-top: 26px;
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: -apple-system, sans-serif;
+    font-size: 11.5px;
+  }
+
+  .colophon .note { opacity: 0.45; }
+  .colophon a { color: var(--espresso); text-decoration: none; border-bottom: 1px solid var(--gold); }
+
+  @media (max-width: 820px) {
+    #cierre { padding: 10vh 8vw 6vh; gap: 6vh; }
+    .buy { flex-direction: column; gap: 4vh; }
+    .buy-media img { height: 34vh; }
+    .buy-info { text-align: center; width: 100%; }
+    .buy-info .rule { margin: 18px auto; }
+    .size { text-align: center; }
+    .price-row { justify-content: center; }
+    .colophon { flex-direction: column; gap: 8px; text-align: center; }
+  }
+
   @media (max-width: 820px) {
     canvas#rotator { height: 62vh; max-width: 86vw; }
     .hero-word { font-size: 44px; }
@@ -465,10 +611,52 @@
 
 </section>
 
-<section class="filler">
-  <p>Siguiente sección</p>
-  <h2>Cierre</h2>
+
+<!-- ============ CIERRE + COMPRA ============ -->
+<section id="cierre">
+
+  <div class="buy">
+
+    <div class="buy-media reveal-io">
+      <img src="frames/bottle_00012.webp" alt="Qori — aceite facial de Sacha Inchi">
+    </div>
+
+    <div class="buy-info">
+      <p class="eyebrow reveal-io">Single-Origin · Perú</p>
+      <h2 class="reveal-io">Aceite facial<br>de Sacha Inchi</h2>
+      <div class="rule reveal-io"></div>
+      <p class="desc reveal-io">Prensado en frio, sin nada mas. Se absorbe sin dejar rastro.</p>
+
+      <p class="size-label reveal-io">Tamaño</p>
+      <div class="sizes reveal-io">
+        <button class="size is-active" data-price="78" data-unit="30 ml / 1 fl oz">
+          <span class="vol">30 ml</span>
+          <span class="amt">$78</span>
+        </button>
+        <button class="size" data-price="128" data-unit="60 ml / 2 fl oz">
+          <span class="vol">60 ml</span>
+          <span class="amt">$128</span>
+        </button>
+      </div>
+
+      <div class="price-row reveal-io">
+        <span class="price" id="buyPrice">$78</span>
+        <span class="unit" id="buyUnit">30 ml / 1 fl oz</span>
+      </div>
+
+      <button class="add-cart reveal-io" id="addCart">Agregar al carrito</button>
+      <p class="ship-note reveal-io">Envio gratis · Devolucion en 30 dias</p>
+    </div>
+
+  </div>
+
+  <div class="colophon">
+    <span class="note">Qori es un producto ficticio creado como pieza de portafolio.</span>
+    <span>Diseño y produccion: <a href="https://diegotecuenta.com">Diego Te Cuenta</a></span>
+  </div>
+
 </section>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -627,6 +815,31 @@ if ('IntersectionObserver' in window) {
   }, { threshold: 0.25 });
 
   aplicVideos.forEach(v => vObserver.observe(v));
+}
+
+/* -----------------------------------------------------------
+   CIERRE — selector de tamaño (simulado)
+   ----------------------------------------------------------- */
+const sizeBtns = document.querySelectorAll('.size');
+const buyPrice = document.getElementById('buyPrice');
+const buyUnit = document.getElementById('buyUnit');
+const addCart = document.getElementById('addCart');
+
+sizeBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    sizeBtns.forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    buyPrice.textContent = '$' + btn.dataset.price;
+    buyUnit.textContent = btn.dataset.unit;
+  });
+});
+
+if (addCart) {
+  addCart.addEventListener('click', () => {
+    const original = addCart.textContent;
+    addCart.textContent = 'Proyecto conceptual — sin tienda real';
+    setTimeout(() => { addCart.textContent = original; }, 2200);
+  });
 }
 
 </script>
