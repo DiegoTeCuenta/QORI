@@ -93,6 +93,102 @@
   }
   .rule { width: 46px; height: 1px; background: var(--gold); margin-bottom: 26px; }
 
+
+  /* ================= PRODUCTO ================= */
+  #producto {
+    min-height: 100vh;
+    padding: 16vh 6vw 14vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12vh;
+  }
+
+  .prod-intro { text-align: center; max-width: 520px; }
+
+  .prod-intro h2 {
+    font-size: clamp(30px, 3.4vw, 46px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  .prod-intro p {
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.45;
+  }
+
+  /* --- composicion de los tres objetos --- */
+  .prod-stage {
+    --h-box: 46vh;
+    --h-bottle: 36vh;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3vw;
+    width: 100%;
+  }
+
+  .prod-stage img {
+    display: block;
+    width: auto;
+    filter: drop-shadow(0 18px 26px rgba(36,28,22,0.13));
+  }
+
+  .prod-stage .obj-box    { height: var(--h-box); }
+  .prod-stage .obj-front  { height: var(--h-bottle); }
+  .prod-stage .obj-back   { height: calc(var(--h-bottle) * 0.9); opacity: 0.9; }
+
+  /* --- beneficios --- */
+  .prod-benefits {
+    display: flex;
+    gap: 5vw;
+    max-width: 1000px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .benefit { flex: 1; max-width: 280px; }
+
+  .benefit .rule-sm {
+    width: 30px; height: 1px;
+    background: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .benefit h3 {
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .benefit p {
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--smoked);
+    opacity: 0.72;
+  }
+
+  @media (max-width: 820px) {
+    #producto { padding: 10vh 8vw; gap: 8vh; }
+    .prod-stage {
+      --h-box: 30vh;
+      --h-bottle: 24vh;
+      gap: 5vw;
+    }
+    .prod-benefits { flex-direction: column; align-items: center; gap: 6vh; }
+    .benefit { max-width: 100%; text-align: center; }
+    .benefit .rule-sm { margin: 0 auto 14px; }
+    .prod-intro h2 { font-size: 27px; }
+  }
+
   @media (max-width: 820px) {
     canvas#rotator { height: 62vh; max-width: 86vw; }
     .hero-word { font-size: 44px; }
@@ -135,9 +231,44 @@
   </div>
 </div>
 
+
+<!-- ============ PRODUCTO ============ -->
+<section id="producto">
+
+  <div class="prod-intro">
+    <h2 class="reveal-io">Un aceite.<br>Nada que explicar.</h2>
+    <p class="reveal-io">Sacha Inchi Facial Oil · 30 ml</p>
+  </div>
+
+  <div class="prod-stage">
+    <img class="obj-box   reveal-io" data-depth="26" src="frames/box.webp" alt="Caja Qori">
+    <img class="obj-front reveal-io" data-depth="10" src="frames/bottle-front.webp" alt="Qori — frente">
+    <img class="obj-back  reveal-io" data-depth="34" src="frames/bottle-back.webp" alt="Qori — etiqueta">
+  </div>
+
+  <div class="prod-benefits">
+    <div class="benefit reveal-io">
+      <div class="rule-sm"></div>
+      <h3>Se absorbe sin dejar rastro.</h3>
+      <p>No queda pelicula, no queda brillo graso.</p>
+    </div>
+    <div class="benefit reveal-io">
+      <div class="rule-sm"></div>
+      <h3>Un solo ingrediente.</h3>
+      <p>Sacha inchi prensado en frio. Nada mas.</p>
+    </div>
+    <div class="benefit reveal-io">
+      <div class="rule-sm"></div>
+      <h3>Para piel que necesita luz.</h3>
+      <p>Suaviza la textura y devuelve luminosidad natural.</p>
+    </div>
+  </div>
+
+</section>
+
 <section class="filler">
   <p>Siguiente sección</p>
-  <h2>Producto</h2>
+  <h2>Efecto en piel</h2>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -219,6 +350,39 @@ buildSequence({
   total: 121,
   srcFor: (i) => `frames/a00${i + 1}.webp`,
   onUpdateExtra: revealCopy
+});
+
+/* -----------------------------------------------------------
+   PRODUCTO — apariciones escalonadas + parallax sutil
+   ----------------------------------------------------------- */
+
+// aparicion al entrar en viewport
+gsap.utils.toArray('.reveal-io').forEach((el, i) => {
+  gsap.fromTo(el,
+    { opacity: 0, y: 26 },
+    {
+      opacity: 1, y: 0,
+      duration: 1.1,
+      ease: 'power2.out',
+      delay: (i % 3) * 0.14,
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+    }
+  );
+});
+
+// parallax: cada objeto se mueve a distinta velocidad -> profundidad
+gsap.utils.toArray('.prod-stage img').forEach((el) => {
+  const depth = parseFloat(el.dataset.depth) || 0;
+  gsap.to(el, {
+    y: -depth,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#producto',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 0.6
+    }
+  });
 });
 
 </script>
