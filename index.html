@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qori — Prototipo de scroll</title>
+<title>Qori — Luminosidad natural</title>
 <style>
   :root {
     --ivory: #F2EDE4;
@@ -22,28 +22,24 @@
     /* NO usar overflow-x aqui: rompe position:sticky */
   }
 
-
-  section {
+  section.filler {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 40px;
-  }
-
-  .filler {
-    flex-direction: column;
     gap: 12px;
   }
 
-  .filler h2 {
+  section.filler h2 {
     font-size: clamp(28px, 5vw, 48px);
     font-weight: 400;
     letter-spacing: 0.5px;
   }
 
-  .filler p {
+  section.filler p {
     font-family: -apple-system, sans-serif;
     font-size: 14px;
     color: var(--smoked);
@@ -52,10 +48,11 @@
     text-transform: uppercase;
   }
 
-  #hero-pin {
-    height: 400vh; /* scroll distance that drives the full rotation */
-    position: relative;
-  }
+  /* ============================================================
+     HERO — giro del frasco
+     ============================================================ */
+
+  #hero-pin { height: 400vh; position: relative; }
 
   .hero-sticky {
     position: sticky;
@@ -82,19 +79,10 @@
     max-width: 44vw;
   }
 
-  @media (max-width: 700px) {
-    canvas#rotator {
-      height: 62vh;
-      max-width: 86vw;
-    }
-    .hero-word { font-size: 44px; }
-  }
-
   .hero-word {
     margin-top: 26px;
     font-size: clamp(36px, 7vw, 64px);
     letter-spacing: 4px;
-    color: var(--espresso);
   }
 
   .hero-tag {
@@ -114,7 +102,6 @@
     font-family: -apple-system, sans-serif;
     font-size: 13px;
     letter-spacing: 2px;
-    color: var(--smoked);
     opacity: 0.5;
     transition: opacity 0.6s ease;
     pointer-events: none;
@@ -130,22 +117,112 @@
     background: rgba(36,28,22,0.15);
   }
 
-  .progress-fill {
-    height: 100%;
-    width: 0%;
+  .progress-fill { height: 100%; width: 0%; background: var(--gold); }
+
+  /* ============================================================
+     ORIGEN — la vaina se abre
+     ============================================================ */
+
+  #origen-pin { height: 420vh; position: relative; }
+
+  .origen-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6vw;
+    padding: 0 6vw;
+  }
+
+  canvas#pod {
+    height: 78vh;
+    width: auto;
+    max-width: 40vw;
+    flex-shrink: 0;
+  }
+
+  .origen-copy {
+    max-width: 380px;
+    flex-shrink: 1;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .origen-copy h2 {
+    font-size: clamp(30px, 3.4vw, 46px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 26px;
+  }
+
+  .origen-copy p {
+    font-family: -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--smoked);
+    opacity: 0.78;
+    margin-bottom: 22px;
+  }
+
+  .origen-copy .origin-tag {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin: 0;
+  }
+
+  .rule {
+    width: 46px;
+    height: 1px;
     background: var(--gold);
+    margin-bottom: 26px;
+  }
+
+  @media (max-width: 820px) {
+    canvas#rotator { height: 62vh; max-width: 86vw; }
+    .hero-word { font-size: 44px; }
+
+    .origen-sticky {
+      flex-direction: column;
+      gap: 0;
+      justify-content: center;
+      padding: 5vh 8vw;
+    }
+    canvas#pod {
+      height: 46vh;
+      max-width: 80vw;
+    }
+    .origen-copy {
+      max-width: 100%;
+      text-align: center;
+    }
+    .origen-copy h2 { font-size: 27px; margin-bottom: 16px; }
+    .origen-copy p { font-size: 14px; margin-bottom: 14px; }
+    .rule { margin: 0 auto 16px; }
   }
 </style>
 </head>
 <body>
-
-
 
 <section class="filler">
   <p>Scroll para empezar</p>
   <h2>Qori</h2>
 </section>
 
+<!-- ============ HERO ============ -->
 <div id="hero-pin">
   <div class="hero-sticky">
     <div class="hero-label">Single-Origin · Perú</div>
@@ -157,14 +234,23 @@
   </div>
 </div>
 
-<section class="filler">
-  <p>Sección siguiente (origen, producto, etc.)</p>
-  <h2>Continúa el scroll normal aquí</h2>
-</section>
+<!-- ============ ORIGEN ============ -->
+<div id="origen-pin">
+  <div class="origen-sticky">
+    <canvas id="pod" width="1080" height="1920"></canvas>
+    <div class="origen-copy">
+      <div class="rule reveal" data-at="0.12"></div>
+      <h2 class="reveal" data-at="0.16">Del corazón<br>de la Amazonía.</h2>
+      <p class="reveal" data-at="0.42">Una semilla que crece envuelta en su propia estrella.</p>
+      <p class="reveal" data-at="0.62">Prensada en frío, sin nada más.</p>
+      <p class="origin-tag reveal" data-at="0.80">Single-Origin · Perú</p>
+    </div>
+  </div>
+</div>
 
 <section class="filler">
-  <p>Fin del prototipo</p>
-  <h2>—</h2>
+  <p>Siguiente sección</p>
+  <h2>Producto</h2>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -172,73 +258,88 @@
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-// ---------------------------------------------------------------
-// 1) CARGAR LOS FRAMES REALES
-// Los archivos deben estar en una carpeta llamada "frames/"
-// junto a este index.html
-// ---------------------------------------------------------------
-const TOTAL_FRAMES = 120;
-const frames = [];
-let loadedCount = 0;
+/* -----------------------------------------------------------
+   Utilidad: carga una secuencia de frames y la liga al scroll
+   ----------------------------------------------------------- */
+function buildSequence({ canvasId, triggerId, total, srcFor, onProgress }) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const frames = [];
+  let loaded = 0;
 
-const loaderEl = document.getElementById('loader');
+  function render(index) {
+    const i = Math.max(0, Math.min(total - 1, index));
+    const img = frames[i];
+    if (img && img.complete && img.naturalWidth) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }
+  }
 
-for (let i = 0; i < TOTAL_FRAMES; i++) {
-  const img = new Image();
-  img.src = `frames/bottle_${String(i).padStart(5, '0')}.webp`;
+  for (let i = 0; i < total; i++) {
+    const img = new Image();
+    img.src = srcFor(i);
+    img.onload = () => {
+      loaded++;
+      if (loaded === 1) render(0);
+      if (onProgress) onProgress(loaded, total);
+    };
+    frames.push(img);
+  }
 
-  img.onload = () => {
-    loadedCount++;
-    if (loadedCount === 1) renderFrame(0);
-    if (loaderEl) {
-      const pct = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-      loaderEl.textContent = pct + '%';
-      if (loadedCount === TOTAL_FRAMES) {
-        loaderEl.style.opacity = '0';
+  ScrollTrigger.create({
+    trigger: triggerId,
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 0.4,
+    onUpdate: (self) => {
+      render(Math.round(self.progress * (total - 1)));
+      if (canvasId === 'rotator') {
+        document.getElementById('progressFill').style.width = (self.progress * 100) + '%';
+      }
+      if (canvasId === 'pod') {
+        revealCopy(self.progress);
       }
     }
-  };
+  });
 
-  img.onerror = () => {
-    if (loaderEl) {
-      loaderEl.textContent = 'No se encontro frames/bottle_' + String(i).padStart(5,'0') + '.webp';
-      loaderEl.style.fontSize = '11px';
-    }
-  };
-
-  frames.push(img);
+  return { render };
 }
 
-// ---------------------------------------------------------------
-// 2) CANVAS DE DESTINO + DIBUJO DEL FRAME SEGÚN SCROLL
-// Esta parte SÍ es la lógica real que se usará en producción.
-// ---------------------------------------------------------------
-const canvas = document.getElementById('rotator');
-const ctx = canvas.getContext('2d');
-const progressFill = document.getElementById('progressFill');
+/* -----------------------------------------------------------
+   HERO — frasco girando (120 frames)
+   ----------------------------------------------------------- */
+const loaderEl = document.getElementById('loader');
 
-function renderFrame(index) {
-  const clamped = Math.max(0, Math.min(TOTAL_FRAMES - 1, index));
-  const img = frames[clamped];
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (img.complete) ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-}
-
-renderFrame(0);
-
-// ---------------------------------------------------------------
-// 3) SCROLLTRIGGER — pin + scrub
-// ---------------------------------------------------------------
-ScrollTrigger.create({
-  trigger: '#hero-pin',
-  start: 'top top',
-  end: 'bottom bottom',
-  scrub: 0.4,
-  onUpdate: (self) => {
-    const frameIndex = Math.round(self.progress * (TOTAL_FRAMES - 1));
-    renderFrame(frameIndex);
-    progressFill.style.width = (self.progress * 100) + '%';
+buildSequence({
+  canvasId: 'rotator',
+  triggerId: '#hero-pin',
+  total: 120,
+  srcFor: (i) => `frames/bottle_${String(i).padStart(5, '0')}.webp`,
+  onProgress: (loaded, total) => {
+    const pct = Math.round((loaded / total) * 100);
+    loaderEl.textContent = pct + '%';
+    if (loaded === total) loaderEl.style.opacity = '0';
   }
+});
+
+/* -----------------------------------------------------------
+   ORIGEN — vaina abriéndose (121 frames: a001 … a121)
+   ----------------------------------------------------------- */
+const revealEls = Array.from(document.querySelectorAll('.origen-copy .reveal'));
+
+function revealCopy(progress) {
+  revealEls.forEach(el => {
+    const at = parseFloat(el.dataset.at);
+    el.classList.toggle('is-visible', progress >= at);
+  });
+}
+
+buildSequence({
+  canvasId: 'pod',
+  triggerId: '#origen-pin',
+  total: 121,
+  srcFor: (i) => `frames/a${String(i + 1).padStart(3, '0')}.webp`
 });
 </script>
 </body>
