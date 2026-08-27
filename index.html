@@ -262,6 +262,80 @@
 
   .piel-copy .sub.is-visible { opacity: 0.85; transform: translateY(0); }
 
+
+  /* ================= APLICACION (fondo espresso) ================= */
+  #aplicacion {
+    background: var(--espresso);
+    color: var(--ivory);
+    padding: 16vh 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8vh;
+  }
+
+  .aplic-intro { text-align: center; max-width: 560px; }
+
+  .aplic-intro h2 {
+    font-size: clamp(30px, 3.6vw, 50px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .aplic-intro p {
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .aplic-grid {
+    display: flex;
+    gap: 2vw;
+    width: 100%;
+    max-width: 1100px;
+    justify-content: center;
+  }
+
+  .aplic-item { flex: 1; max-width: 340px; }
+
+  .aplic-item video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    background: #1A140F;
+  }
+
+  .aplic-item .step {
+    margin-top: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .aplic-item .num {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+  }
+
+  .aplic-item .label {
+    font-size: 17px;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 820px) {
+    #aplicacion { padding: 10vh 8vw; gap: 6vh; }
+    .aplic-grid { flex-direction: column; align-items: center; gap: 5vh; }
+    .aplic-item { max-width: 78vw; width: 100%; }
+    .aplic-intro h2 { font-size: 27px; }
+  }
+
   @media (max-width: 820px) {
     canvas#rotator { height: 62vh; max-width: 86vw; }
     .hero-word { font-size: 44px; }
@@ -352,9 +426,48 @@
   </div>
 </div>
 
+
+<!-- ============ APLICACION ============ -->
+<section id="aplicacion">
+
+  <div class="aplic-intro">
+    <h2 class="reveal-io">El ritual.</h2>
+    <p class="reveal-io">Tres gotas, mañana y noche</p>
+  </div>
+
+  <div class="aplic-grid">
+
+    <div class="aplic-item reveal-io">
+      <video src="frames/apply-dropper.webm" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="step">
+        <span class="num">01</span>
+        <span class="label">Tres gotas en la palma.</span>
+      </div>
+    </div>
+
+    <div class="aplic-item reveal-io">
+      <video src="frames/apply-jaw.webm" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="step">
+        <span class="num">02</span>
+        <span class="label">Presiona sobre el rostro.</span>
+      </div>
+    </div>
+
+    <div class="aplic-item reveal-io">
+      <video src="frames/apply-collarbone.webm" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="step">
+        <span class="num">03</span>
+        <span class="label">Termina en cuello y pecho.</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
 <section class="filler">
   <p>Siguiente sección</p>
-  <h2>Aplicación</h2>
+  <h2>Cierre</h2>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -495,6 +608,26 @@ gsap.fromTo('#pielMedia',
     }
   }
 );
+
+/* -----------------------------------------------------------
+   APLICACION — los clips solo corren cuando estan a la vista
+   ----------------------------------------------------------- */
+const aplicVideos = document.querySelectorAll('#aplicacion video');
+
+if ('IntersectionObserver' in window) {
+  const vObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const v = entry.target;
+      if (entry.isIntersecting) {
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+
+  aplicVideos.forEach(v => vObserver.observe(v));
+}
 
 </script>
 </body>
