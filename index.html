@@ -19,8 +19,22 @@
     background: var(--ivory);
     color: var(--espresso);
     font-family: 'Georgia', 'Cormorant Garamond', serif;
-    /* NO usar overflow-x aqui: rompe position:sticky */
   }
+
+  /* ---- panel de diagnóstico (quitar cuando todo funcione) ---- */
+  #debug {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #241C16;
+    color: #F2EDE4;
+    font-family: -apple-system, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 8px 12px;
+    z-index: 9999;
+    white-space: pre-wrap;
+  }
+  #debug b { color: #E0B366; }
 
   section.filler {
     min-height: 100vh;
@@ -33,182 +47,73 @@
     gap: 12px;
   }
 
-  section.filler h2 {
-    font-size: clamp(28px, 5vw, 48px);
-    font-weight: 400;
-    letter-spacing: 0.5px;
-  }
-
+  section.filler h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 400; }
   section.filler p {
     font-family: -apple-system, sans-serif;
-    font-size: 14px;
-    color: var(--smoked);
-    opacity: 0.6;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 14px; opacity: 0.6;
+    letter-spacing: 1px; text-transform: uppercase;
   }
 
-  /* ============================================================
-     HERO — giro del frasco
-     ============================================================ */
-
+  /* ================= HERO ================= */
   #hero-pin { height: 400vh; position: relative; }
-
   .hero-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: sticky; top: 0; height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
   }
-
   .hero-label {
-    font-family: -apple-system, sans-serif;
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.5;
-    margin-bottom: 14px;
+    font-family: -apple-system, sans-serif; font-size: 12px;
+    letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0.5; margin-bottom: 14px;
   }
-
-  canvas#rotator {
-    height: 58vh;
-    width: auto;
-    max-width: 44vw;
-  }
-
-  .hero-word {
-    margin-top: 26px;
-    font-size: clamp(36px, 7vw, 64px);
-    letter-spacing: 4px;
-  }
-
+  canvas#rotator { height: 58vh; width: auto; max-width: 44vw; }
+  .hero-word { margin-top: 26px; font-size: clamp(36px, 7vw, 64px); letter-spacing: 4px; }
   .hero-tag {
-    margin-top: 8px;
-    font-family: -apple-system, sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    opacity: 0.55;
-    text-transform: uppercase;
+    margin-top: 8px; font-family: -apple-system, sans-serif;
+    font-size: 13px; letter-spacing: 2px; opacity: 0.55; text-transform: uppercase;
   }
-
-  #loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: -apple-system, sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    opacity: 0.5;
-    transition: opacity 0.6s ease;
-    pointer-events: none;
-  }
-
   .progress-track {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 160px;
-    height: 2px;
-    background: rgba(36,28,22,0.15);
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    width: 160px; height: 2px; background: rgba(36,28,22,0.15);
   }
-
   .progress-fill { height: 100%; width: 0%; background: var(--gold); }
 
-  /* ============================================================
-     ORIGEN — la vaina se abre
-     ============================================================ */
-
+  /* ================= ORIGEN ================= */
   #origen-pin { height: 420vh; position: relative; }
-
   .origen-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6vw;
-    padding: 0 6vw;
+    position: sticky; top: 0; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    gap: 6vw; padding: 0 6vw;
   }
-
-  canvas#pod {
-    height: 78vh;
-    width: auto;
-    max-width: 40vw;
-    flex-shrink: 0;
-  }
-
-  .origen-copy {
-    max-width: 380px;
-    flex-shrink: 1;
-  }
+  canvas#pod { height: 78vh; width: auto; max-width: 40vw; flex-shrink: 0; }
+  .origen-copy { max-width: 380px; }
 
   .reveal {
-    opacity: 0;
-    transform: translateY(22px);
+    opacity: 0; transform: translateY(22px);
     transition: opacity 0.9s ease, transform 0.9s ease;
   }
-
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
   .origen-copy h2 {
-    font-size: clamp(30px, 3.4vw, 46px);
-    font-weight: 400;
-    line-height: 1.15;
-    margin-bottom: 26px;
+    font-size: clamp(30px, 3.4vw, 46px); font-weight: 400;
+    line-height: 1.15; margin-bottom: 26px;
   }
-
   .origen-copy p {
-    font-family: -apple-system, sans-serif;
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--smoked);
-    opacity: 0.78;
-    margin-bottom: 22px;
+    font-family: -apple-system, sans-serif; font-size: 15px;
+    line-height: 1.8; color: var(--smoked); opacity: 0.78; margin-bottom: 22px;
   }
-
   .origen-copy .origin-tag {
-    font-family: -apple-system, sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.45;
-    margin: 0;
+    font-family: -apple-system, sans-serif; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; opacity: 0.45; margin: 0;
   }
-
-  .rule {
-    width: 46px;
-    height: 1px;
-    background: var(--gold);
-    margin-bottom: 26px;
-  }
+  .rule { width: 46px; height: 1px; background: var(--gold); margin-bottom: 26px; }
 
   @media (max-width: 820px) {
     canvas#rotator { height: 62vh; max-width: 86vw; }
     .hero-word { font-size: 44px; }
-
-    .origen-sticky {
-      flex-direction: column;
-      gap: 0;
-      justify-content: center;
-      padding: 5vh 8vw;
-    }
-    canvas#pod {
-      height: 46vh;
-      max-width: 80vw;
-    }
-    .origen-copy {
-      max-width: 100%;
-      text-align: center;
-    }
+    .origen-sticky { flex-direction: column; gap: 0; padding: 5vh 8vw; }
+    canvas#pod { height: 46vh; max-width: 80vw; }
+    .origen-copy { max-width: 100%; text-align: center; }
     .origen-copy h2 { font-size: 27px; margin-bottom: 16px; }
     .origen-copy p { font-size: 14px; margin-bottom: 14px; }
     .rule { margin: 0 auto 16px; }
@@ -217,16 +122,16 @@
 </head>
 <body>
 
+<div id="debug">iniciando…</div>
+
 <section class="filler">
   <p>Scroll para empezar</p>
   <h2>Qori</h2>
 </section>
 
-<!-- ============ HERO ============ -->
 <div id="hero-pin">
   <div class="hero-sticky">
     <div class="hero-label">Single-Origin · Perú</div>
-    <div id="loader">0%</div>
     <canvas id="rotator" width="1080" height="1920"></canvas>
     <div class="hero-word">Qori</div>
     <div class="hero-tag">Luminosidad natural</div>
@@ -234,7 +139,6 @@
   </div>
 </div>
 
-<!-- ============ ORIGEN ============ -->
 <div id="origen-pin">
   <div class="origen-sticky">
     <canvas id="pod" width="1080" height="1920"></canvas>
@@ -258,32 +162,60 @@
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-/* -----------------------------------------------------------
-   Utilidad: carga una secuencia de frames y la liga al scroll
-   ----------------------------------------------------------- */
-function buildSequence({ canvasId, triggerId, total, srcFor, onProgress }) {
+const debugEl = document.getElementById('debug');
+const stats = {
+  bottle: { ok: 0, fail: 0, total: 0, firstFail: null },
+  pod:    { ok: 0, fail: 0, total: 0, firstFail: null }
+};
+
+function printDebug() {
+  debugEl.innerHTML =
+    `<b>frasco</b> ok:${stats.bottle.ok}/${stats.bottle.total} err:${stats.bottle.fail}` +
+    (stats.bottle.firstFail ? `  →  ${stats.bottle.firstFail}` : '') +
+    `\n<b>vaina</b>  ok:${stats.pod.ok}/${stats.pod.total} err:${stats.pod.fail}` +
+    (stats.pod.firstFail ? `  →  ${stats.pod.firstFail}` : '');
+}
+
+function buildSequence({ canvasId, triggerId, total, srcFor, key, onUpdateExtra }) {
   const canvas = document.getElementById(canvasId);
   const ctx = canvas.getContext('2d');
   const frames = [];
-  let loaded = 0;
+  stats[key].total = total;
 
+  function isReady(img) { return img && img.complete && img.naturalWidth > 0; }
+
+  // dibuja el frame pedido; si no cargó, busca el más cercano que sí
   function render(index) {
-    const i = Math.max(0, Math.min(total - 1, index));
-    const img = frames[i];
-    if (img && img.complete && img.naturalWidth) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    let i = Math.max(0, Math.min(total - 1, index));
+    let img = frames[i];
+
+    if (!isReady(img)) {
+      let found = null;
+      for (let d = 1; d < total; d++) {
+        if (isReady(frames[i - d])) { found = frames[i - d]; break; }
+        if (isReady(frames[i + d])) { found = frames[i + d]; break; }
+      }
+      img = found;
     }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (img) ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   }
 
   for (let i = 0; i < total; i++) {
     const img = new Image();
-    img.src = srcFor(i);
+    const src = srcFor(i);
     img.onload = () => {
-      loaded++;
-      if (loaded === 1) render(0);
-      if (onProgress) onProgress(loaded, total);
+      stats[key].ok++;
+      if (stats[key].ok === 1) render(0);
+      printDebug();
     };
+    img.onerror = () => {
+      stats[key].fail++;
+      if (!stats[key].firstFail) stats[key].firstFail = src;
+      printDebug();
+    };
+    img.src = src;
     frames.push(img);
   }
 
@@ -294,44 +226,28 @@ function buildSequence({ canvasId, triggerId, total, srcFor, onProgress }) {
     scrub: 0.4,
     onUpdate: (self) => {
       render(Math.round(self.progress * (total - 1)));
-      if (canvasId === 'rotator') {
-        document.getElementById('progressFill').style.width = (self.progress * 100) + '%';
-      }
-      if (canvasId === 'pod') {
-        revealCopy(self.progress);
-      }
+      if (onUpdateExtra) onUpdateExtra(self.progress);
     }
   });
-
-  return { render };
 }
 
-/* -----------------------------------------------------------
-   HERO — frasco girando (120 frames)
-   ----------------------------------------------------------- */
-const loaderEl = document.getElementById('loader');
-
+/* HERO */
 buildSequence({
   canvasId: 'rotator',
   triggerId: '#hero-pin',
   total: 120,
+  key: 'bottle',
   srcFor: (i) => `frames/bottle_${String(i).padStart(5, '0')}.webp`,
-  onProgress: (loaded, total) => {
-    const pct = Math.round((loaded / total) * 100);
-    loaderEl.textContent = pct + '%';
-    if (loaded === total) loaderEl.style.opacity = '0';
+  onUpdateExtra: (p) => {
+    document.getElementById('progressFill').style.width = (p * 100) + '%';
   }
 });
 
-/* -----------------------------------------------------------
-   ORIGEN — vaina abriéndose (121 frames: a001 … a121)
-   ----------------------------------------------------------- */
+/* ORIGEN */
 const revealEls = Array.from(document.querySelectorAll('.origen-copy .reveal'));
-
 function revealCopy(progress) {
   revealEls.forEach(el => {
-    const at = parseFloat(el.dataset.at);
-    el.classList.toggle('is-visible', progress >= at);
+    el.classList.toggle('is-visible', progress >= parseFloat(el.dataset.at));
   });
 }
 
@@ -339,8 +255,12 @@ buildSequence({
   canvasId: 'pod',
   triggerId: '#origen-pin',
   total: 121,
-  srcFor: (i) => `frames/a${String(i + 1).padStart(3, '0')}.webp`
+  key: 'pod',
+  srcFor: (i) => `frames/a${String(i + 1).padStart(3, '0')}.webp`,
+  onUpdateExtra: revealCopy
 });
+
+printDebug();
 </script>
 </body>
 </html>
