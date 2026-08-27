@@ -21,21 +21,6 @@
     font-family: 'Georgia', 'Cormorant Garamond', serif;
   }
 
-  /* ---- panel de diagnóstico (quitar cuando todo funcione) ---- */
-  #debug {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: #241C16;
-    color: #F2EDE4;
-    font-family: -apple-system, monospace;
-    font-size: 11px;
-    line-height: 1.5;
-    padding: 8px 12px;
-    z-index: 9999;
-    white-space: pre-wrap;
-  }
-  #debug b { color: #E0B366; }
-
   section.filler {
     min-height: 100vh;
     display: flex;
@@ -122,8 +107,6 @@
 </head>
 <body>
 
-<div id="debug">iniciando…</div>
-
 <section class="filler">
   <p>Scroll para empezar</p>
   <h2>Qori</h2>
@@ -162,25 +145,11 @@
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-const debugEl = document.getElementById('debug');
-const stats = {
-  bottle: { ok: 0, fail: 0, total: 0, firstFail: null },
-  pod:    { ok: 0, fail: 0, total: 0, firstFail: null }
-};
-
-function printDebug() {
-  debugEl.innerHTML =
-    `<b>frasco</b> ok:${stats.bottle.ok}/${stats.bottle.total} err:${stats.bottle.fail}` +
-    (stats.bottle.firstFail ? `  →  ${stats.bottle.firstFail}` : '') +
-    `\n<b>vaina</b>  ok:${stats.pod.ok}/${stats.pod.total} err:${stats.pod.fail}` +
-    (stats.pod.firstFail ? `  →  ${stats.pod.firstFail}` : '');
-}
-
-function buildSequence({ canvasId, triggerId, total, srcFor, key, onUpdateExtra }) {
+function buildSequence({ canvasId, triggerId, total, srcFor, onUpdateExtra }) {
   const canvas = document.getElementById(canvasId);
   const ctx = canvas.getContext('2d');
   const frames = [];
-  stats[key].total = total;
+  let loadedCount = 0;
 
   function isReady(img) { return img && img.complete && img.naturalWidth > 0; }
 
@@ -206,14 +175,8 @@ function buildSequence({ canvasId, triggerId, total, srcFor, key, onUpdateExtra 
     const img = new Image();
     const src = srcFor(i);
     img.onload = () => {
-      stats[key].ok++;
-      if (stats[key].ok === 1) render(0);
-      printDebug();
-    };
-    img.onerror = () => {
-      stats[key].fail++;
-      if (!stats[key].firstFail) stats[key].firstFail = src;
-      printDebug();
+      loadedCount++;
+      if (loadedCount === 1) render(0);
     };
     img.src = src;
     frames.push(img);
@@ -236,7 +199,6 @@ buildSequence({
   canvasId: 'rotator',
   triggerId: '#hero-pin',
   total: 120,
-  key: 'bottle',
   srcFor: (i) => `frames/bottle_${String(i).padStart(5, '0')}.webp`,
   onUpdateExtra: (p) => {
     document.getElementById('progressFill').style.width = (p * 100) + '%';
@@ -255,12 +217,10 @@ buildSequence({
   canvasId: 'pod',
   triggerId: '#origen-pin',
   total: 121,
-  key: 'pod',
-  srcFor: (i) => `frames/a${String(i + 1).padStart(3, '0')}.webp`,
+  srcFor: (i) => `frames/a00${i + 1}.webp`,
   onUpdateExtra: revealCopy
 });
 
-printDebug();
 </script>
 </body>
 </html>
