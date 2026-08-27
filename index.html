@@ -21,24 +21,6 @@
     font-family: 'Georgia', 'Cormorant Garamond', serif;
   }
 
-  section.filler {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px;
-    gap: 12px;
-  }
-
-  section.filler h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 400; }
-  section.filler p {
-    font-family: -apple-system, sans-serif;
-    font-size: 14px; opacity: 0.6;
-    letter-spacing: 1px; text-transform: uppercase;
-  }
-
   /* ================= HERO ================= */
   #hero-pin { height: 400vh; position: relative; }
   .hero-sticky {
@@ -351,13 +333,13 @@
   .buy {
     display: flex;
     align-items: center;
-    gap: 6vw;
-    max-width: 980px;
+    gap: 3vw;
+    max-width: 1020px;
     width: 100%;
   }
 
-  .buy-media { flex: 0 0 38%; display: flex; justify-content: center; }
-  .buy-media img { height: 54vh; width: auto; display: block; }
+  .buy-media { flex: 0 0 42%; display: flex; justify-content: center; }
+  .buy-media img { height: 72vh; width: auto; display: block; }
 
   .buy-info { flex: 1; min-width: 0; }
 
@@ -414,8 +396,12 @@
   .size:hover { border-color: rgba(36,28,22,0.45); }
   .size.is-active { border-color: var(--espresso); }
 
-  .size .vol { font-size: 13px; color: var(--espresso); margin-bottom: 3px; }
-  .size .amt { font-size: 12px; opacity: 0.6; }
+  .size .vol { display: block; font-size: 13px; color: var(--espresso); margin-bottom: 3px; }
+  .size .amt { display: block; font-size: 12px; opacity: 0.6; }
+  .size:focus { outline: none; }
+  .size:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+  .add-cart:focus { outline: none; }
+  .add-cart:focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
 
   .price-row {
     display: flex;
@@ -496,11 +482,6 @@
 </head>
 <body>
 
-<section class="filler">
-  <p>Scroll para empezar</p>
-  <h2>Qori</h2>
-</section>
-
 <div id="hero-pin">
   <div class="hero-sticky">
     <div class="hero-label">Single-Origin · Perú</div>
@@ -543,12 +524,12 @@
     <div class="benefit reveal-io">
       <div class="rule-sm"></div>
       <h3>Se absorbe sin dejar rastro.</h3>
-      <p>No queda pelicula, no queda brillo graso.</p>
+      <p>No queda película, no queda brillo graso.</p>
     </div>
     <div class="benefit reveal-io">
       <div class="rule-sm"></div>
       <h3>Un solo ingrediente.</h3>
-      <p>Sacha inchi prensado en frio. Nada mas.</p>
+      <p>Sacha inchi prensado en frío. Nada más.</p>
     </div>
     <div class="benefit reveal-io">
       <div class="rule-sm"></div>
@@ -618,14 +599,14 @@
   <div class="buy">
 
     <div class="buy-media reveal-io">
-      <img src="frames/bottle_00012.webp" alt="Qori — aceite facial de Sacha Inchi">
+      <img src="frames/bottle_00000.webp" alt="Qori — aceite facial de Sacha Inchi">
     </div>
 
     <div class="buy-info">
       <p class="eyebrow reveal-io">Single-Origin · Perú</p>
       <h2 class="reveal-io">Aceite facial<br>de Sacha Inchi</h2>
       <div class="rule reveal-io"></div>
-      <p class="desc reveal-io">Prensado en frio, sin nada mas. Se absorbe sin dejar rastro.</p>
+      <p class="desc reveal-io">Prensado en frío, sin nada más. Se absorbe sin dejar rastro.</p>
 
       <p class="size-label reveal-io">Tamaño</p>
       <div class="sizes reveal-io">
@@ -645,14 +626,14 @@
       </div>
 
       <button class="add-cart reveal-io" id="addCart">Agregar al carrito</button>
-      <p class="ship-note reveal-io">Envio gratis · Devolucion en 30 dias</p>
+      <p class="ship-note reveal-io">Envío gratis · Devolución en 30 días</p>
     </div>
 
   </div>
 
   <div class="colophon">
     <span class="note">Qori es un producto ficticio creado como pieza de portafolio.</span>
-    <span>Diseño y produccion: <a href="https://diegotecuenta.com">Diego Te Cuenta</a></span>
+    <span>Diseño y producción: <a href="https://diegotecuenta.com">Diego Te Cuenta</a></span>
   </div>
 
 </section>
